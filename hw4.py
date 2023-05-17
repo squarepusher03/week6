@@ -11,6 +11,8 @@ pg.init()
 window_surface = pg.display.set_mode((wi.SCREEN_WIDTH, wi.SCREEN_HEIGHT))
 drawn_items.append(window_surface)
 
+background_surface = pg.image.load(r"imgs\bg-pattern.png")
+
 myBall = Ball(400, 300, 15, Colors.PADDLE1_BLUE)
 myBall.draw(window_surface)
 drawn_items.append(myBall)
@@ -30,6 +32,8 @@ def drawDrawables(items: list, score: int):
     for item in items:
         if item is window_surface:
             item.fill(Colors.WHITE)
+            # draws a surface with an img onto the screen within the image's rect
+            item.blit(background_surface, window_surface.get_rect())
         elif isinstance(item, Ball):
             item.draw(window_surface)
 
@@ -57,7 +61,7 @@ def gameLoop():
             if event.type == pg.QUIT:
                 running = False
             elif event.type == pg.MOUSEBUTTONDOWN:
-                myBall.setVisible(not myBall.isVisible())  # not how I would've done this but ok
+                pass
 
         fpsClock.tick(30)
 
